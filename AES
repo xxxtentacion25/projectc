@@ -1,0 +1,10 @@
+from Crypto.Cipher import AES
+key = b"1234567890123456"
+msg = input("Enter message: ")
+aes = AES.new(key, AES.MODE_ECB)
+msg = msg.ljust(16)
+encrypted = aes.encrypt(msg.encode())
+print("Encrypted:", encrypted)
+aes = AES.new(key, AES.MODE_ECB)
+decrypted = aes.decrypt(encrypted)
+print("Decrypted:", decrypted.decode().strip())
