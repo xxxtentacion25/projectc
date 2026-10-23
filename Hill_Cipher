@@ -1,28 +1,23 @@
+def encrypt(text):
+    text = text.upper()
+    if len(text) % 2 != 0:
+        text += "X"
+    result = ""
+    for i in range(0, len(text), 2):
+        a = ord(text[i]) - 65
+        b = ord(text[i+1]) - 65
+        result += chr(((3*a + 3*b) % 26) + 65)
+        result += chr(((2*a + 5*b) % 26) + 65)
+    return result
+def decrypt(text):
+    result = ""
+    for i in range(0, len(text), 2):
+        a = ord(text[i]) - 65
+        b = ord(text[i+1]) - 65
+        result += chr(((15*a + 17*b) % 26) + 65)
+        result += chr(((20*a + 9*b) % 26) + 65)
+    return result
 text = input("Enter text: ")
-rails = int(input("Enter rails: "))
-# Encryption
-cipher = ""
-cycle = 2 * (rails - 1)
-for r in range(rails):
-    for i in range(len(text)):
-        x = i % cycle
-        if x == r or x == cycle - r:
-            cipher += text[i]
-print("Encrypted:", cipher)
-# Decryption
-pattern = []
-for i in range(len(text)):
-    x = i % cycle
-    pattern.append(x if x < rails else cycle - x)
-counts = [pattern.count(r) for r in range(rails)]
-rail = []
-start = 0
-for c in counts:
-    rail.append(cipher[start:start+c])
-    start += c
-pos = [0] * rails
-plain = ""
-for r in pattern:
-    plain += rail[r][pos[r]]
-    pos[r] += 1
-print("Decrypted:", plain)
+enc = encrypt(text)
+print("Encrypted:", enc)
+print("Decrypted:", decrypt(enc))
