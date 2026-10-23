@@ -1,0 +1,22 @@
+plain = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+cipher = "QWERTYUIOPASDFGHJKLZXCVBNM"
+def encrypt(text):
+    result = ""
+    for i in text.upper():
+        if i in plain:
+            result += cipher[plain.index(i)]
+        else:
+            result += i
+    return result
+def decrypt(text):
+    result = ""
+    for i in text.upper():
+        if i in cipher:
+            result += plain[cipher.index(i)]
+        else:
+            result += i
+    return result
+text = input("Enter text: ")
+enc = encrypt(text)
+print("Encrypt:", enc)
+print("Decrypt:", decrypt(enc))
