@@ -1,0 +1,9 @@
+from Crypto.Cipher import DES
+key = b'12345678'
+text = input("Enter 8 character text: ")
+text = text.encode()
+des = DES.new(key, DES.MODE_ECB)
+encrypted = des.encrypt(text)
+print("Encrypted:", encrypted)
+decrypted = des.decrypt(encrypted)
+print("Decrypted:", decrypted.decode())
