@@ -1,0 +1,16 @@
+text = input("Enter text: ")
+key = input("Enter key: ")
+cipher = ""
+for i in range(len(text)):
+    p = ord(text[i]) - ord('a')
+    k = ord(key[i]) - ord('a')
+    c = (p ^ k) % 26
+    cipher += chr(c + ord('a'))
+print("Encrypted:", cipher)
+plain = ""
+for i in range(len(cipher)):
+    c = ord(cipher[i]) - ord('a')
+    k = ord(key[i]) - ord('a')
+    p = (c ^ k) % 26
+    plain += chr(p + ord('a'))
+print("Decrypted:", plain)
