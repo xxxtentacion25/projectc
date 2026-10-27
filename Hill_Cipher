@@ -1,23 +1,20 @@
-def encrypt(text):
-    text = text.upper()
-    if len(text) % 2 != 0:
-        text += "X"
-    result = ""
-    for i in range(0, len(text), 2):
-        a = ord(text[i]) - 65
-        b = ord(text[i+1]) - 65
-        result += chr(((3*a + 3*b) % 26) + 65)
-        result += chr(((2*a + 5*b) % 26) + 65)
-    return result
-def decrypt(text):
-    result = ""
-    for i in range(0, len(text), 2):
-        a = ord(text[i]) - 65
-        b = ord(text[i+1]) - 65
-        result += chr(((15*a + 17*b) % 26) + 65)
-        result += chr(((20*a + 9*b) % 26) + 65)
-    return result
-text = input("Enter text: ")
-enc = encrypt(text)
-print("Encrypted:", enc)
-print("Decrypted:", decrypt(enc))
+key = [[3, 3], [2, 5]]
+text = input("Enter plaintext: ").upper().replace(" ", "")
+if len(text) % 2 != 0:
+    text += "X"
+cipher = ""
+for i in range(0, len(text), 2):
+    a = ord(text[i]) - 65
+    b = ord(text[i + 1]) - 65
+    x = (3 * a + 3 * b) % 26
+    y = (2 * a + 5 * b) % 26
+    cipher += chr(x + 65) + chr(y + 65)
+print("Encrypted:", cipher)
+plain = ""
+for i in range(0, len(cipher), 2):
+    a = ord(cipher[i]) - 65
+    b = ord(cipher[i + 1]) - 65
+    x = (15 * a + 17 * b) % 26
+    y = (20 * a + 9 * b) % 26
+    plain += chr(x + 65) + chr(y + 65)
+print("Decrypted:", plain)
